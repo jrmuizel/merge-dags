@@ -282,7 +282,7 @@ impl<'a> MergeState<'a> {
                 &OldItemInfo::Unused(_) => panic!("should only encounter used predecessors"),
                 &OldItemInfo::BeingProcessed => panic!("somebody forgot to clean up"),
                 &OldItemInfo::Discarded(ref discarded_item_direct_predecessors) => {
-                    result.extend(discarded_item_direct_predecessors)
+                    result.extend(&discarded_item_direct_predecessors[0..discarded_item_direct_predecessors.len().min(1)])
                 }
                 &OldItemInfo::AddedToMergedList(index_in_merged_dag) => {
                     result.push(index_in_merged_dag)
